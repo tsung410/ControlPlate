@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ControlPlate</title>
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/vue.global.js"></script>
+
+  <link rel="stylesheet" href="./css/universal.css">
+</head>
+<body>
+  <div id="app">
+    
+    <!-- header -->
+    <div class="container-fluid px-4 sticky-top shadow" id="header">
+      <div class="row row-cols-auto align-items-center" style="min-height: 50px;">
+        <div class="col">
+          <div class="nav">
+            <a href="index.html" class="nav-link text-warning" style="margin-left: 30px;">主頁</a>
+            <a href="websiteSetting.html" class="nav-link">網站設定</a>
+            <a href="reserveLimit.html" class="nav-link">預留數量限制</a>
+            <a href="accountingEditor.html" class="nav-link">帳務編輯</a>
+            <a href="billingErrorChecking.html" class="nav-link">帳務天地</a>
+            <a href="dailyAccounts.html" class="nav-link">當日報表</a>
+            <a href="customerDetails.html" class="nav-link">客戶明細</a>
+            <a href="customerTotal.html" class="nav-link">客戶總表</a>
+          </div>
+        </div>
+  
+        <div class="col ms-auto me-4">
+          <div class="nav justify-content-end">
+            <a href="sendOrder.html" class="nav-link text-warning">出單</a>
+            <a href="sendOrderWebsiteSetting.html" class="nav-link">網站設定</a>
+            <a href="basicPrice.html" class="nav-link">基本價格</a>
+            <a href="IncreaseAndDecrease.html" class="nav-link">漲價降倍</a>
+            <a href="#" class="nav-link">下注紀錄</a>
+            <a href="sendOrderAccounts.html" class="nav-link _nav_focus">帳務查詢</a>
+          </div>
+        </div>
+  
+        <div class="col">
+          <div class="d-flex gap-3 align-items-center">
+            <div class="dropdown">
+              <ul class="dropdown-menu">
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="sun" hidden>
+                    <img src="image/sun.png" width="30" height="30">
+                    淺色主題
+                  </label>
+                </li>
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="moon" hidden checked>
+                    <img src="image/moon.png" width="30" height="30">
+                    深色主題
+                  </label>
+                </li>
+              </ul>
+              <button class="_btn_mode" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="image/sun.png" width="30" height="30" class="sun">
+                <img src="image/moon.png" width="30" height="30" class="moon" style="filter: invert(90%);">
+              </button>
+            </div>
+            <div class="dropdown">
+              <button class="navbar-toggler" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="dropdown-menu _bg_main2 shadow">
+                <li><a class="dropdown-item" href="#">當日開獎</a></li>
+                <li><a class="dropdown-item" href="#">開球紀錄</a></li>
+                <li><a class="dropdown-item" href="#">使用期限</a></li>
+                <li><a class="dropdown-item" href="#">操作說明</a></li>
+                <li><a class="dropdown-item" href="#">官方網站</a></li>
+                <li><a class="dropdown-item" href="#">更改密碼</a></li>
+                <li><a class="dropdown-item" href="#">分享</a></li>
+                <li><a class="dropdown-item" href="#">登出</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header -->
+
+    <div class="container-fluid p-5" id="main">
+      <div class="row justify-content-center">
+        <div class="col-auto">
+
+          <div class="hstack gap-3 mb-3">
+            <button class="_btn_blue text-nowrap">登入</button>
+            <button class="_btn_blue text-nowrap">登出</button>
+            <button class="_btn_blue text-nowrap">查詢本週</button>
+            <button class="_btn_blue text-nowrap">查詢上週</button>
+          </div>
+  
+          <div class="rounded _bg_main p-3 shadow">
+            <div class="overflow-auto" style="height: 730px;">
+              <table class="table table-borderless text-center text-nowrap">
+                <thead class="_th_border _bg_main sticky-top align-middle">
+                  <tr>
+                    <th width="50"><input type="checkbox" name="" id="" class="form-check-input"></th>
+                    <th width="90">名稱</th>
+                    <th width="50">登入</th>
+                    <th width="50">完成</th>
+                    <th width="90">一</th>
+                    <th width="90">二</th>
+                    <th width="90">三</th>
+                    <th width="90">四</th>
+                    <th width="90">五</th>
+                    <th width="90">六</th>
+                    <th width="90">合計</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in 20">
+                    <td><input type="checkbox" name="" id="" class="form-check-input"></td>
+                    <td>風雲-永-0.1</td>
+                    <td><div class="_login"></div></td>
+                    <td>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                      </svg>
+                    </td>
+                    <td><a href="" class="_text_color2">100000000</a></td>
+                    <td><a href="" class="_text_color2">100000000</a></td>
+                    <td><a href="" class="_text_color2">100000000</a></td>
+                    <td><a href="" class="_text_color2">100000000</a></td>
+                    <td><a href="" class="_text_color2">100000000</a></td>
+                    <td><a href="" class="_text_color2">100000000</a></td>
+                    <th><a href="" class="_text_color2">100000000</a></th>
+                  </tr>
+                </tbody>
+                <tfoot class="_tf_border _bg_main sticky-bottom align-middle">
+                  <tr>
+                    <th></th>
+                    <th>合計</th>
+                    <th></th>
+                    <th>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                      </svg>
+                    </th>
+                    <th><a href="" class="_text_color2">100000000</a></th>
+                    <th><a href="" class="_text_color2">100000000</a></th>
+                    <th><a href="" class="_text_color2">100000000</a></th>
+                    <th><a href="" class="_text_color2">100000000</a></th>
+                    <th><a href="" class="_text_color2">100000000</a></th>
+                    <th><a href="" class="_text_color2">100000000</a></th>
+                    <th><a href="" class="_text_color2">100000000</a></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const { createApp } = Vue;
+
+    createApp({}).mount('#app');
+
+  </script>
+</body>
+</html>

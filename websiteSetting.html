@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ControlPlate</title>
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/vue.global.js"></script>
+
+  <link rel="stylesheet" href="./css/universal.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- header -->
+    <div class="container-fluid px-4 sticky-top shadow" id="header">
+      <div class="row row-cols-auto align-items-center" style="min-height: 50px;">
+        <div class="col">
+          <div class="nav">
+            <a href="index.html" class="nav-link text-warning" style="margin-left: 30px;">主頁</a>
+            <a href="websiteSetting.html" class="nav-link _nav_focus">網站設定</a>
+            <a href="reserveLimit.html" class="nav-link">預留數量限制</a>
+            <a href="accountingEditor.html" class="nav-link">帳務編輯</a>
+            <a href="billingErrorChecking.html" class="nav-link">帳務天地</a>
+            <a href="dailyAccounts.html" class="nav-link">當日報表</a>
+            <a href="customerDetails.html" class="nav-link">客戶明細</a>
+            <a href="customerTotal.html" class="nav-link">客戶總表</a>
+          </div>
+        </div>
+
+        <div class="col ms-auto me-4">
+          <div class="nav justify-content-end">
+            <a href="sendOrder.html" class="nav-link text-warning">出單</a>
+            <a href="sendOrderWebsiteSetting.html" class="nav-link">網站設定</a>
+            <a href="basicPrice.html" class="nav-link">基本價格</a>
+            <a href="IncreaseAndDecrease.html" class="nav-link">漲價降倍</a>
+            <a href="#" class="nav-link">下注紀錄</a>
+            <a href="sendOrderAccounts.html" class="nav-link">帳務查詢</a>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="d-flex gap-3 align-items-center">
+            <div class="dropdown">
+              <ul class="dropdown-menu">
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="sun" hidden>
+                    <img src="image/sun.png" width="30" height="30">
+                    淺色主題
+                  </label>
+                </li>
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="moon" hidden checked>
+                    <img src="image/moon.png" width="30" height="30">
+                    深色主題
+                  </label>
+                </li>
+              </ul>
+              <button class="_btn_mode" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="image/sun.png" width="30" height="30" class="sun">
+                <img src="image/moon.png" width="30" height="30" class="moon" style="filter: invert(90%);">
+              </button>
+            </div>
+            <div class="dropdown">
+              <button class="navbar-toggler" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="dropdown-menu _bg_main2 shadow">
+                <li><a class="dropdown-item" href="#">當日開獎</a></li>
+                <li><a class="dropdown-item" href="#">開球紀錄</a></li>
+                <li><a class="dropdown-item" href="#">使用期限</a></li>
+                <li><a class="dropdown-item" href="#">操作說明</a></li>
+                <li><a class="dropdown-item" href="#">官方網站</a></li>
+                <li><a class="dropdown-item" href="#">更改密碼</a></li>
+                <li><a class="dropdown-item" href="#">分享</a></li>
+                <li><a class="dropdown-item" href="#">登出</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header -->
+    
+    <div class="container-fluid p-5" id="main">
+      <div class="row row-cols-auto gx-5 justify-content-center">
+
+        <!-- 網站列表區 -->
+        <div class="col">
+
+          <h6 class="_tb_head mb-3">網站列表</h6>
+
+          <div class="rounded _bg_main p-2 shadow">
+            <div class="overflow-auto" style="width: 460px; height: 690px;">
+              <table class="table table-borderless text-center text-nowrap">
+                <thead class="_th_border _bg_main sticky-top align-middle">
+                  <tr>
+                    <th width="70">編號</th>
+                    <th width="120">名稱</th>
+                    <th width="90">帳號</th>
+                    <th width="">下注時間(分)<br>入統計</th>
+                    <th width="">關盤前(分)<br>直接入統計</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in 20">
+                    <td>E01</td>
+                    <td>風雲-永-0.1</td>
+                    <td>z36978</td>
+                    <td>15</td>
+                    <td>10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- 網站列表區 -->
+
+        <!-- 網站設定區 -->
+        <div class="col">
+
+          <h6 class="_tb_head mb-3">網站設定</h6>
+
+          <div class="card _bg_main mb-3 shadow">
+            <div class="card-body">
+              <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text justify-content-center" style="width: 92px;">編號</span>
+                <input type="text" class="form-control" size="5">
+              </div>
+              <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text justify-content-center" style="width: 92px;">名稱</span>
+                <input type="text" class="form-control flex-grow-1">
+              </div>
+              <hr>
+              <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text justify-content-center" style="width: 92px;">網址</span>
+                <input type="text" class="form-control flex-grow-1">
+              </div>
+              <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text justify-content-center" style="width: 92px;">備用網址</span>
+                <input type="text" class="form-control flex-grow-1">
+              </div>
+              <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text justify-content-center" style="width: 92px;">刪單時間</span>
+                <input type="text" class="form-control" size="5">
+              </div>
+              <hr>
+              <div class="input-group flex-nowrap">
+                <span class="input-group-text justify-content-center" style="width: 92px;">帳號</span>
+                <input type="text" class="form-control" size="5">
+                <span class="input-group-text justify-content-center" style="width: 92px;">密碼</span>
+                <input type="text" class="form-control" size="5">
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 justify-content-end">
+            <button class="_btn_blue">新增</button>
+            <button class="_btn_blue">修改</button>
+            <button class="_btn_blue">放棄</button>
+            <button class="_btn_red">刪除</button>
+            <button class="_btn_blue">儲存</button>
+          </div>
+        </div>
+        <!-- 網站設定區 -->
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const { createApp } = Vue;
+
+    createApp({}).mount('#app');
+
+  </script>
+</body>
+</html>

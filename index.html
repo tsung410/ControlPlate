@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ControlPlate</title>
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/vue.global.js"></script>
+
+  <link rel="stylesheet" href="./css/universal.css">
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- header -->
+    <div class="container-fluid px-4 sticky-top shadow" id="header">
+      <div class="row row-cols-auto align-items-center" style="min-height: 50px;">
+        <div class="col">
+          <div class="nav">
+            <a href="index.html" class="nav-link text-warning _nav_focus" style="margin-left: 30px;">主頁</a>
+            <a href="websiteSetting.html" class="nav-link">網站設定</a>
+            <a href="reserveLimit.html" class="nav-link">預留數量限制</a>
+            <a href="accountingEditor.html" class="nav-link">帳務編輯</a>
+            <a href="billingErrorChecking.html" class="nav-link">帳務天地</a>
+            <a href="dailyAccounts.html" class="nav-link">當日報表</a>
+            <a href="customerDetails.html" class="nav-link">客戶明細</a>
+            <a href="customerTotal.html" class="nav-link">客戶總表</a>
+          </div>
+        </div>
+
+        <div class="col ms-auto me-4">
+          <div class="nav justify-content-end">
+            <a href="sendOrder.html" class="nav-link text-warning">出單</a>
+            <a href="sendOrderWebsiteSetting.html" class="nav-link">網站設定</a>
+            <a href="basicPrice.html" class="nav-link">基本價格</a>
+            <a href="IncreaseAndDecrease.html" class="nav-link">漲價降倍</a>
+            <a href="#" class="nav-link">下注紀錄</a>
+            <a href="sendOrderAccounts.html" class="nav-link">帳務查詢</a>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="d-flex gap-3 align-items-center">
+            <div class="dropdown">
+              <ul class="dropdown-menu">
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="sun" hidden>
+                    <img src="image/sun.png" width="30" height="30">
+                    淺色主題
+                  </label>
+                </li>
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="moon" hidden checked>
+                    <img src="image/moon.png" width="30" height="30">
+                    深色主題
+                  </label>
+                </li>
+              </ul>
+              <button class="_btn_mode" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="image/sun.png" width="30" height="30" class="sun">
+                <img src="image/moon.png" width="30" height="30" class="moon" style="filter: invert(90%);">
+              </button>
+            </div>
+            <div class="dropdown">
+              <button class="navbar-toggler" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="dropdown-menu _bg_main2 shadow">
+                <li><a class="dropdown-item" href="#">當日開獎</a></li>
+                <li><a class="dropdown-item" href="#">開球紀錄</a></li>
+                <li><a class="dropdown-item" href="#">使用期限</a></li>
+                <li><a class="dropdown-item" href="#">操作說明</a></li>
+                <li><a class="dropdown-item" href="#">官方網站</a></li>
+                <li><a class="dropdown-item" href="#">更改密碼</a></li>
+                <li><a class="dropdown-item" href="#">分享</a></li>
+                <li><a class="dropdown-item" href="#">登出</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header -->
+
+    <div class="container-fluid p-5" id="main">
+      <div class="row row-cols-auto justify-content-center align-items-end h-100 gx-5">
+        <div class="col">
+
+          <!-- 登出、排序 -->
+          <div class="row row-cols-auto align-items-center gx-3 mb-3">
+            <div class="col ms-2 p-2">
+              <input type="checkbox" name="" id="" class="form-check-input align-self-center">
+            </div>
+            <div class="col">
+              <button class="_btn_blue me-2">登入</button>
+              <button class="_btn_blue">登出</button>
+            </div>
+            <div class="col">
+              <div class="input-group flex-nowrap shadow">
+                <span class="input-group-text">排序</span>
+                <select class="form-select">
+                  <option selected value="" class="text-black">編號</option>
+                  <option value="" class="text-black">版名</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- 登出、排序 -->
+
+          <!-- 網站列表 -->
+          <ul class="list-group overflow-auto" style="width: 315px; height: 675px; padding-right: 5px;">
+            <li class="list-group-item _bg_main shadow" role="button" v-for="item in 15">
+              <div class="row gx-3 align-items-center">
+                <div class="col-1">
+                  <input type="checkbox" name="" id="" class="form-check-input">
+                </div>
+                <div class="col-2">E02.</div>
+                <div class="col-5">
+                  <div class="_text_color _ls_2">風雲-永-0.1</div>
+                  <div class="_ls_2">z36978</div>
+                </div>
+                <div class="col-1"><div class="vr"></div></div>
+                <div class="col-2">
+                  <a href="" class="_link_font">開啟<br/>網站</a>
+                </div>
+                <div class="col-1">
+                  <div class="_login"></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <!-- 網站列表 -->
+
+        </div>
+        <div class="col">
+
+          <div class="row row-cols-auto mb-3">
+            <div class="col">
+
+              <!-- 遊戲切換 tab -->
+              <div class="d-flex gap-4 mb-4">
+                <label class="_tab_circle"><input type="radio" value="全部" v-model="gameType" hidden>全部</label>
+                <label class="_tab_circle"><input type="radio" value="539" v-model="gameType" hidden>539</label>
+                <label class="_tab_circle"><input type="radio" value="大樂" v-model="gameType" hidden>大樂</label>
+                <label class="_tab_circle"><input type="radio" value="六合" v-model="gameType" hidden>六合</label>
+                <label class="_tab_circle"><input type="radio" value="加州" v-model="gameType" hidden>加州</label>
+              </div>
+              <!-- 遊戲切換 tab -->
+
+              <!-- 資料表切換 tab -->
+              <div class="_tab_group d-flex gap-1" id="dataType">
+                <label class="_tab pb-3" role="button"><input type="radio" value="電腦版" v-model="dataType" hidden checked>電腦版</label>
+                <label class="_tab pb-3" role="button"><input type="radio" value="支數統計" v-model="dataType" hidden>支數統計</label>
+                <label class="_tab pb-3" role="button"><input type="radio" value="下層限支" v-model="dataType" hidden>下層限支</label>
+                <label class="_tab pb-3" role="button"><input type="radio" value="各類結果" v-model="dataType" hidden>各類結果</label>
+                <label class="_tab pb-3" role="button"><input type="radio" value="電腦佔成" v-model="dataType" hidden>電腦佔成</label>
+                <label class="_tab pb-3" role="button"><input type="radio" value="包牌" v-model="dataType" hidden>包牌</label>
+              </div>
+              <!-- 資料表切換 tab -->
+
+            </div>
+
+            <div class="col ms-auto align-self-end" :hidden="this.dataType !== '下層限支'">
+              <div class="_btn_group d-flex justify-content-end mb-2">
+                <button class="_btn_blue" @click="this.edit = true" :disabled="edit">修改</button>
+                <button class="_btn_blue" @click="this.edit = false" :disabled="!edit">放棄</button>
+                <button class="_btn_blue" @click="this.edit = false" :disabled="!edit">儲存</button>
+              </div>
+              <div class="d-flex text-nowrap mb-2">
+                <div class="input-group flex-nowrap shadow me-2" :hidden="!edit">
+                  <span class="input-group-text">全部數量</span>
+                  <select class="form-select">
+                    <option selected value="" class="text-black">類別</option>
+                    <option value="" class="text-black">全車</option>
+                    <option value="" class="text-black">二星</option>
+                    <option value="" class="text-black">三星</option>
+                    <option value="" class="text-black">四星</option>
+                    <option value="" class="text-black">五星</option>
+                    <option value="" class="text-black">台號</option>
+                    <option value="" class="text-black">特尾</option>
+                    <option value="" class="text-black">天一</option>
+                    <option value="" class="text-black">天二</option>
+                    <option value="" class="text-black">天三</option>
+                  </select>
+                  <input type="text" class="form-control bg-white" size="5">
+                </div>
+                <button class="_btn_blue" :hidden="!edit">確定</button>
+              </div>
+            </div>
+          </div>
+
+
+          
+          <div class="rounded _bg_main p-2 shadow" >
+            <div id="middleList">
+
+              <!-- 電腦版 table -->
+              <table class="table table-borderless text-center text-nowrap align-middle" :hidden="this.dataType !== '電腦版'">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="90">下層</th>
+                    <th width="75">總計</th>
+                    <th width="75">中獎</th>
+                    <th width="75">輸贏</th>
+                    <th width="75">客戶小計</th>
+                    <th width="75">代理小計</th>
+                    <th width="75">總代理小計</th>
+                    <th width="75">股東小計</th>
+                    <th width="75">大股東小計</th>
+                    <th width="75">總監小計</th>
+                    <th width="75">個人所得</th>
+                    <th width="75">水差</th>
+                  </tr>
+                </thead>
+                <tbody role="button">
+                  <tr v-for="item in 20">
+                    <td>
+                      <div class="row row-cols-auto gx-3 justify-content-center align-items-center">
+                        <div class="col">
+                          <div class="dropdown">
+                            <div class="_btn_option" role="button" data-bs-toggle="dropdown" aria-expanded="false"></div>
+                            <ul class="dropdown-menu _bg_main2 shadow">
+                              <li><a class="dropdown-item" href="#">下注明細</a></li>
+                              <li><a class="dropdown-item" href="#">對匯設定</a></li>
+                              <li><a class="dropdown-item" href="#">平均數量</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="_text_color">阿德/代</div>
+                          <div>z36978</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- 電腦版 table -->
+
+              <!-- 支數統計 table -->
+              <table class="table table-borderless text-center text-nowrap align-middle" :hidden="this.dataType !== '支數統計'">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="90">下層</th>
+                    <th width="55">全車</th>
+                    <th width="55">二星</th>
+                    <th width="55">三星</th>
+                    <th width="55">四星</th>
+                    <th width="55">五星</th>
+                    <th width="55">台號</th>
+                    <th width="55">特尾</th>
+                    <th width="55">天一</th>
+                    <th width="55">天二</th>
+                    <th width="55">天三</th>
+                  </tr>
+                </thead>
+                <tbody role="button">
+                  <tr v-for="item in 20">
+                    <td>
+                      <div class="_text_color">阿德/代</div>
+                      <div>z36978</div>
+                    </td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- 支數統計 table -->
+
+              <!-- 下層限支 table -->
+              <table class="table table-borderless text-center text-nowrap align-middle" :hidden="this.dataType !== '下層限支'">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="90">下層</th>
+                    <th width="55">全車</th>
+                    <th width="55">二星</th>
+                    <th width="55">三星</th>
+                    <th width="55">四星</th>
+                    <th width="55">五星</th>
+                    <th width="55">台號</th>
+                    <th width="55">特尾</th>
+                    <th width="55">天一</th>
+                    <th width="55">天二</th>
+                    <th width="55">天三</th>
+                  </tr>
+                </thead>
+                <tbody role="button">
+                  <tr v-for="item in 20">
+                    <td>
+                      <div class="_text_color">阿德/代</div>
+                      <div>z36978</div>
+                    </td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                    <td><input type="text" :class="{'form-control': edit, 'form-control-plaintext': !edit}" value="1000" :readonly="!edit"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- 下層限支 table -->
+
+              <!-- 各類結果 table -->
+              <table class="table table-borderless text-center text-nowrap align-middle" :hidden="this.dataType !== '各類結果'">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="90">下層</th>
+                    <th width="75">全車結果</th>
+                    <th width="75">二星結果</th>
+                    <th width="75">三星結果</th>
+                    <th width="75">四星結果</th>
+                    <th width="75">五星結果</th>
+                    <th width="75">台號結果</th>
+                    <th width="75">特尾結果</th>
+                    <th width="75">天一結果</th>
+                    <th width="75">天二結果</th>
+                    <th width="75">天三結果</th>
+                  </tr>
+                </thead>
+                <tbody role="button">
+                  <tr v-for="item in 20">
+                    <td>
+                      <div class="_text_color">阿德/代</div>
+                      <div>z36978</div>
+                    </td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- 各類結果 table -->
+
+              <!-- 電腦佔成 table -->
+              <table class="table table-borderless text-center text-nowrap align-middle" :hidden="this.dataType !== '電腦佔成'">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="90">下層</th>
+                    <th width="55">全車</th>
+                    <th width="55">二星</th>
+                    <th width="55">三星</th>
+                    <th width="55">四星</th>
+                    <th width="55">五星</th>
+                    <th width="55">台號</th>
+                    <th width="55">特尾</th>
+                    <th width="55">天一</th>
+                    <th width="55">天二</th>
+                    <th width="55">天三</th>
+                  </tr>
+                </thead>
+                <tbody role="button">
+                  <tr v-for="item in 20">
+                    <td>
+                      <div class="_text_color">阿德/代</div>
+                      <div>z36978</div>
+                    </td>
+                    <td>20%</td>
+                    <td>20%</td>
+                    <td>20%</td>
+                    <td>20%</td>
+                    <td>20%</td>
+                    <td>20%</td>
+                    <td>20%</td>
+                    <td>20%</td>
+                    <td>20%</td>
+                    <td>20%</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- 電腦佔成 table -->
+
+              <!-- 包牌 table -->
+              <table class="table table-borderless text-center text-nowrap align-middle" :hidden="this.dataType !== '包牌'">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="90">下層</th>
+                    <th width="55">全車</th>
+                    <th width="55">二星</th>
+                    <th width="55">三星</th>
+                    <th width="55">四星</th>
+                    <th width="55">五星</th>
+                    <th width="55">台號</th>
+                    <th width="55">特尾</th>
+                    <th width="55">天一</th>
+                    <th width="55">天二</th>
+                    <th width="55">天三</th>
+                  </tr>
+                </thead>
+                <tbody role="button">
+                  <tr v-for="item in 20">
+                    <td>
+                      <div class="row row-cols-auto gx-3 justify-content-center align-items-center">
+                        <div class="col">
+                          <div class="dropdown">
+                            <div class="_btn_option" role="button" data-bs-toggle="dropdown" aria-expanded="false"></div>
+                            <ul class="dropdown-menu _bg_main2 shadow">
+                              <li><a class="dropdown-item" href="#">下注明細</a></li>
+                              <li><a class="dropdown-item" href="#">包牌設定</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="_text_color">阿德/代</div>
+                          <div>z36978</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- 包牌 table -->
+
+            </div>
+          </div>
+        </div>
+        <div class="col">
+
+          <!-- 類別按鈕 -->
+          <div class="_btn_group mb-2">
+            <button class="_btn_blue" :class="{'opacity-0': gameType === '539', 'visually-hidden': gameType === '539'}">天一</button>
+            <button class="_btn_blue" :class="{'opacity-0': gameType === '539', 'visually-hidden': gameType === '539'}">天二</button>
+            <button class="_btn_blue" :class="{'opacity-0': gameType === '539', 'visually-hidden': gameType === '539'}">天三</button>
+          </div>
+          <div class="_btn_group mb-3">
+            <button class="_btn_blue">全車</button>
+            <button class="_btn_blue">二星</button>
+            <button class="_btn_blue">三星</button>
+            <button class="_btn_blue">四星</button>
+            <button class="_btn_blue">五星</button>
+            <button class="_btn_blue">台號</button>
+            <button class="_btn_blue">特尾</button>
+          </div>
+          <!-- 類別按鈕 -->
+
+          <!-- 號碼統計 table -->
+          <div class="rounded _bg_main p-2 shadow">
+            <div id="statisticsTable">
+              <table class="table table-borderless text-center text-nowrap">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="70">彩種</th>
+                    <th width="90">二星組合</th>
+                    <th width="70">客戶量</th>
+                    <th width="84">實際佔成量</th>
+                    <th width="70">自留數量</th>
+                    <th width="70">已出數量</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in 20">
+                    <td>六合</td>
+                    <td class="_text_color">01.02</td>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>30</td>
+                    <td>50</td>
+                  </tr>
+                </tbody>
+                <tfoot class="_tf_border _bg_main sticky-bottom">
+                  <tr>
+                    <td class="text-warning">六合</td>
+                    <td class="text-warning">總計</td>
+                    <td class="text-warning">100</td>
+                    <td class="text-warning">80</td>
+                    <td class="text-warning">30</td>
+                    <td class="text-warning">50</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- 號碼統計 table -->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          gameType: '全部',
+          dataType: '電腦版',
+          edit: false,
+        }
+      }
+    }).mount('#app');
+    
+  </script>
+</body>
+</html>

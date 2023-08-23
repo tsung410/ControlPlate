@@ -1,0 +1,31 @@
+.btn-secondary {
+  background-color: var(--bg-maincolor);
+  color: var(--hcolor);
+  border: 0;
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-maincolor3);
+  color: var(--hcolor);
+}
+
+.btn-close {
+  filter: invert(100%);
+}
+
+.modal-header {
+  border-bottom: 1px solid #696973;
+}
+
+.modal-footer {
+  border-top: 1px solid #696973;
+}
+
+._border_bottom {
+  border-bottom: 1px solid #4b4b55;
+}
+
+._bg_blue {
+  background-color: #263c6e;
+  background-image: var(--bs-gradient);
+}

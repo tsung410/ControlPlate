@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ControlPlate</title>
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/vue.global.js"></script>
+
+  <link rel="stylesheet" href="./css/universal.css">
+  <link rel="stylesheet" href="./css/customerDetails.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- header -->
+    <div class="container-fluid px-4 sticky-top shadow" id="header">
+      <div class="row row-cols-auto align-items-center" style="min-height: 50px;">
+        <div class="col">
+          <div class="nav">
+            <a href="index.html" class="nav-link text-warning" style="margin-left: 30px;">主頁</a>
+            <a href="websiteSetting.html" class="nav-link">網站設定</a>
+            <a href="reserveLimit.html" class="nav-link">預留數量限制</a>
+            <a href="accountingEditor.html" class="nav-link">帳務編輯</a>
+            <a href="billingErrorChecking.html" class="nav-link">帳務天地</a>
+            <a href="dailyAccounts.html" class="nav-link">當日報表</a>
+            <a href="customerDetails.html" class="nav-link _nav_focus">客戶明細</a>
+            <a href="customerTotal.html" class="nav-link">客戶總表</a>
+          </div>
+        </div>
+
+        <div class="col ms-auto me-4">
+          <div class="nav justify-content-end">
+            <a href="sendOrder.html" class="nav-link text-warning">出單</a>
+            <a href="sendOrderWebsiteSetting.html" class="nav-link">網站設定</a>
+            <a href="basicPrice.html" class="nav-link">基本價格</a>
+            <a href="IncreaseAndDecrease.html" class="nav-link">漲價降倍</a>
+            <a href="#" class="nav-link">下注紀錄</a>
+            <a href="sendOrderAccounts.html" class="nav-link">帳務查詢</a>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="d-flex gap-3 align-items-center">
+            <div class="dropdown">
+              <ul class="dropdown-menu">
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="sun" hidden>
+                    <img src="image/sun.png" width="30" height="30">
+                    淺色主題
+                  </label>
+                </li>
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="moon" hidden checked>
+                    <img src="image/moon.png" width="30" height="30">
+                    深色主題
+                  </label>
+                </li>
+              </ul>
+              <button class="_btn_mode" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="image/sun.png" width="30" height="30" class="sun">
+                <img src="image/moon.png" width="30" height="30" class="moon" style="filter: invert(90%);">
+              </button>
+            </div>
+            <div class="dropdown">
+              <button class="navbar-toggler" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="dropdown-menu _bg_main2 shadow">
+                <li><a class="dropdown-item" href="#">當日開獎</a></li>
+                <li><a class="dropdown-item" href="#">開球紀錄</a></li>
+                <li><a class="dropdown-item" href="#">使用期限</a></li>
+                <li><a class="dropdown-item" href="#">操作說明</a></li>
+                <li><a class="dropdown-item" href="#">官方網站</a></li>
+                <li><a class="dropdown-item" href="#">更改密碼</a></li>
+                <li><a class="dropdown-item" href="#">分享</a></li>
+                <li><a class="dropdown-item" href="#">登出</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header -->
+
+    <div class="container-fluid p-4" id="main">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex flex-wrap gap-3" style="max-width: 1700px;">
+          <div class="card _bg_main shadow" style="width: 260px;" v-for="item in 18">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-2">
+                <h6 class="_fs_15 _ls_2 fw-bold _text_color mb-0 text-truncate">阿德</h6>
+                <button class="_btn_blue _btn_sm text-nowrap ms-auto me-2" data-bs-toggle="modal" data-bs-target="#detailEdit">編輯</button>
+                <button class="_btn_blue _btn_sm text-nowrap" data-bs-toggle="modal" data-bs-target="#detailEdit">列印</button>
+
+                <!-- 明細編輯modal -->
+                <div class="modal fade" id="detailEdit" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content _bg_main" style="width: 400px;">
+                      <div class="modal-header _bg_blue">
+                        <h5 class="modal-title text-white _ls_5">明細編輯</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="overflow-auto" style="height: 300px;">
+                          <table class="table table-borderless align-middle">
+                            <thead class="_th_border _bg_main text-nowrap sticky-top">
+                              <tr>
+                                <th width="50" class="text-center"><input type="checkbox" name="" id="" class="form-check-input" checked></th>
+                                <th>項目</th>
+                                <th>金額</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="item in 20">
+                                <td class="text-center"><input type="checkbox" name="" id="" class="form-check-input" checked></td>
+                                <th><input type="text" class="form-control" value="風雲-永-0.1"></th>
+                                <td><input type="text" class="form-control" value="1345678910"></td>
+                              </tr>
+                              <tr v-for="item in addItem">
+                                <td class="text-center"><input type="checkbox" name="" id="" class="form-check-input" checked></td>
+                                <th><input type="text" class="form-control" value=""></th>
+                                <td><input type="text" class="form-control" value=""></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="_btn_blue me-2" @click="this.addItem += 1">新增項目</button>
+                        <button type="button" class="_btn_blue me-2">儲存</button>
+                        <button type="button" class="_btn_blue">放棄</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 明細編輯modal -->
+              </div>
+              <hr class="m-0 mb-2">
+              <div style="height: 200px; overflow: scroll;">
+                <table class="table table-sm table-borderless text-nowrap mb-0">
+                  <tbody>
+                    <tr v-for="item in 8">
+                      <th width="100">風雲-永-0.1</th>
+                      <td width="100">1345678910</td>
+                    </tr>
+                  </tbody>
+                  <tfoot class="_tf_border sticky-bottom _bg_main">
+                    <tr>
+                      <th width="100">合計</th>
+                      <td width="100">1345678910</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group-vertical text-nowrap" role="group" aria-label="Vertical button group">
+          <button type="button" class="btn btn-secondary">上一頁</button>
+          <button type="button" class="btn btn-secondary">1</button>
+          <button type="button" class="btn btn-secondary">2</button>
+          <button type="button" class="btn btn-secondary">3</button>
+          <button type="button" class="btn btn-secondary">4</button>
+          <button type="button" class="btn btn-secondary">5</button>
+          <button type="button" class="btn btn-secondary">下一頁</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          addItem: 0,
+        }
+      }
+    }).mount('#app');
+
+  </script>
+</body>
+</html>

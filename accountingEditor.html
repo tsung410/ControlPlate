@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ControlPlate</title>
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/vue.global.js"></script>
+
+  <link rel="stylesheet" href="./css/universal.css">
+  <link rel="stylesheet" href="./css/accountingEditor.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- header -->
+    <div class="container-fluid px-4 sticky-top shadow" id="header">
+      <div class="row row-cols-auto align-items-center" style="min-height: 50px;">
+        <div class="col">
+          <div class="nav">
+            <a href="index.html" class="nav-link text-warning" style="margin-left: 30px;">主頁</a>
+            <a href="websiteSetting.html" class="nav-link">網站設定</a>
+            <a href="reserveLimit.html" class="nav-link">預留數量限制</a>
+            <a href="accountingEditor.html" class="nav-link _nav_focus">帳務編輯</a>
+            <a href="billingErrorChecking.html" class="nav-link">帳務天地</a>
+            <a href="dailyAccounts.html" class="nav-link">當日報表</a>
+            <a href="customerDetails.html" class="nav-link">客戶明細</a>
+            <a href="customerTotal.html" class="nav-link">客戶總表</a>
+          </div>
+        </div>
+
+        <div class="col ms-auto me-4">
+          <div class="nav justify-content-end">
+            <a href="sendOrder.html" class="nav-link text-warning">出單</a>
+            <a href="sendOrderWebsiteSetting.html" class="nav-link">網站設定</a>
+            <a href="basicPrice.html" class="nav-link">基本價格</a>
+            <a href="IncreaseAndDecrease.html" class="nav-link">漲價降倍</a>
+            <a href="#" class="nav-link">下注紀錄</a>
+            <a href="sendOrderAccounts.html" class="nav-link">帳務查詢</a>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="d-flex gap-3 align-items-center">
+            <div class="dropdown">
+              <ul class="dropdown-menu">
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="sun" hidden>
+                    <img src="image/sun.png" width="30" height="30">
+                    淺色主題
+                  </label>
+                </li>
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="moon" hidden checked>
+                    <img src="image/moon.png" width="30" height="30">
+                    深色主題
+                  </label>
+                </li>
+              </ul>
+              <button class="_btn_mode" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="image/sun.png" width="30" height="30" class="sun">
+                <img src="image/moon.png" width="30" height="30" class="moon" style="filter: invert(90%);">
+              </button>
+            </div>
+            <div class="dropdown">
+              <button class="navbar-toggler" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="dropdown-menu _bg_main2 shadow">
+                <li><a class="dropdown-item" href="#">當日開獎</a></li>
+                <li><a class="dropdown-item" href="#">開球紀錄</a></li>
+                <li><a class="dropdown-item" href="#">使用期限</a></li>
+                <li><a class="dropdown-item" href="#">操作說明</a></li>
+                <li><a class="dropdown-item" href="#">官方網站</a></li>
+                <li><a class="dropdown-item" href="#">更改密碼</a></li>
+                <li><a class="dropdown-item" href="#">分享</a></li>
+                <li><a class="dropdown-item" href="#">登出</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header -->
+    
+    <div class="container-fluid p-5" id="main">
+      
+      <div class="row row-cols-auto gx-5">
+
+        <!-- 帳務編輯區 -->
+        <div class="col" style="margin-left: 220px;">
+
+          <!-- 日期查詢 -->
+          <div class="d-flex gap-3 align-items-center ms-3 mb-4">
+            <input type="checkbox" name="" id="" class="form-check-input">
+            <div class="d-flex gap-2 text-nowrap">
+              <button class="_btn_blue">登入</button>
+              <button class="_btn_blue">登出</button>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+              <input type="date" name="" id="" class="form-control">
+              <span class="fw-bold">~</span>
+              <input type="date" name="" id="" class="form-control">
+            </div>
+            <div class="_btn_group text-nowrap">
+              <button class="_btn_blue">本週</button>
+              <button class="_btn_blue">上週</button>
+            </div>
+            <div class="d-flex gap-2 text-nowrap w-25">
+              <button class="_btn_blue w-100">查詢</button>
+              <button class="_btn_blue w-100">儲存資料</button>
+            </div>
+          </div>
+          <!-- 日期查詢 -->
+
+          <div class="row row-cols-auto gx-5">
+
+            <!-- 網站列表 -->
+            <div class="col">
+              <ul class="list-group overflow-auto pe-1" style="width: 380px; height: 730px;">
+                <li class="list-group-item _bg_main shadow" role="button" v-for="item in 15">
+                  <div class="row gx-3 align-items-center">
+                    <div class="col-1">
+                      <input type="checkbox" name="" id="" class="form-check-input">
+                    </div>
+                    <div class="col-2">E02.</div>
+                    <div class="col-4">
+                      <div class="_text_color _ls_2">風雲-永-0.1</div>
+                      <div class="_ls_2">z36978</div>
+                    </div>
+                    <div class="col-1"><div class="vr"></div></div>
+                    <div class="col-2">
+                      <a href="" class="_link_font">開啟<br/>網站</a>
+                    </div>
+                    <div class="col-auto">
+                      <div class="_login"></div>
+                    </div>
+                    <div class="col-auto ms-auto">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- 網站列表 -->
+
+            <!-- 帳務編輯 -->
+            <div class="col">
+
+              <!-- 下層列表 -->
+              <div class="rounded _bg_main p-2 shadow mb-2">
+                <div class="d-flex gap-2 mb-2">
+                  <button class="_btn_blue w-100" @click="this.edit = true" :disabled="edit">修改</button>
+                  <button class="_btn_blue w-100" @click="this.edit = false" :disabled="!edit">放棄</button>
+                  <button class="_btn_blue w-100" @click="this.edit = false" :disabled="!edit">儲存設定</button>
+                </div>
+                <div id="" style="height: 615px; overflow: auto;">
+                  <table class="table table-borderless text-center align-middle">
+                    <thead class="_th_border _bg_main text-nowrap sticky-top">
+                      <tr>
+                        <th width="100">下層名稱</th>
+                        <th width="200">客戶金額</th>
+                        <th width="200">個人所得金額</th>
+                        <th width="60"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="item in 15">
+
+                        <!-- 下層客戶名稱 -->
+                        <td>
+                          <div class="d-flex justify-content-center align-items-center gap-2">
+                            <div class="_btn_option p-0" role="button" data-bs-toggle="modal" data-bs-target="#customerEditor" :hidden="!edit"></div>
+                            <div>阿德/代</div>
+                          </div>
+
+                          <!-- 客戶編輯modal -->
+                          <div class="modal fade" id="customerEditor" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content _bg_main">
+                                <div class="modal-header _bg_blue">
+                                  <h5 class="modal-title text-white _ls_5">客戶編輯</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row row-cols-auto align-items-baseline mb-3">
+                                    <div class="col"><input type="radio" name="customerSetting" id=""></div>
+                                    <div class="col">
+                                      <select class="form-select">
+                                        <option selected class="text-dark">選擇客戶</option>
+                                        <option value="" class="text-dark">001.阿德</option>
+                                        <option value="" class="text-dark">001.阿德</option>
+                                        <option value="" class="text-dark">001.阿德</option>
+                                        <option value="" class="text-dark">001.阿德</option>
+                                        <option value="" class="text-dark">001.阿德</option>
+                                        <option value="" class="text-dark">001.阿德</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="row row-cols-auto align-items-baseline">
+                                    <div class="col">
+                                      <input type="radio" name="customerSetting" id="" class="me-4" checked>
+                                      <label class="text-white _fs_15 _ls_2 mb-2">新增客戶</label>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input-group flex-nowrap mb-4">
+                                        <span class="input-group-text">編號</span>
+                                        <input type="text" class="form-control" size="1">
+                                        <span class="input-group-text">客戶名稱</span>
+                                        <input type="text" class="form-control" size="5">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="_btn_blue">儲存</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- 客戶編輯modal -->
+                          
+                        </td>
+                        <!-- 下層客戶名稱 -->
+
+                        <!-- 下層客戶金額 -->
+                        <td>
+                          <div class="d-flex gap-2 justify-content-center align-items-center">
+
+                            <div>
+                              <select class="form-select form-select-sm flex-grow-0" :disabled="!edit">
+                                <option selected class="text-dark">選擇層級</option>
+                                <option value="會員" class="text-dark">會員</option>
+                                <option value="代理" class="text-dark">代理</option>
+                                <option value="總代理" class="text-dark">總代理</option>
+                                <option value="股東" class="text-dark">股東</option>
+                                <option value="大股東" class="text-dark">大股東</option>
+                                <option value="總監" class="text-dark">總監</option>
+                              </select>
+                            </div>
+
+                            <div>1325647890</div>
+
+                          </div>
+                        </td>
+                        <!-- 下層客戶金額 -->
+
+                        <!-- 個人所得金額 -->
+                        <td>
+                          <div class="hstack gap-2 justify-content-center align-items-center">
+
+                            <div>
+                              <select class="form-select form-select-sm" :disabled="!edit">
+                                <option selected class="text-dark">選擇層級</option>
+                                <option value="會員" class="text-dark">會員</option>
+                                <option value="代理" class="text-dark">代理</option>
+                                <option value="總代理" class="text-dark">總代理</option>
+                                <option value="股東" class="text-dark">股東</option>
+                                <option value="大股東" class="text-dark">大股東</option>
+                                <option value="總監" class="text-dark">總監</option>
+                              </select>
+                            </div>
+
+                            <div class="d-flex gap-2 justify-content-center align-items-center">
+
+                              <div>1325647890</div>
+  
+                              <div class="_btn_option p-0" role="button" data-bs-toggle="modal" data-bs-target="#editPercentage" :hidden="!edit"></div>
+  
+                              <!-- 個人所得佔成modal -->
+                              <div class="modal fade" id="editPercentage" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content _bg_main">
+                                    <div class="modal-header _bg_blue">
+                                      <h5 class="modal-title text-white _ls_5">個人所得佔成設定</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="input-group flex-nowrap mb-4">
+                                        <span class="input-group-text">自留</span>
+                                        <input type="text" class="form-control" size="1" disabled>
+                                        <span class="input-group-text">%</span>
+                                      </div>
+                                      <div class="row row-cols-auto align-items-baseline">
+                                        <div class="col">
+                                          <div class="input-group flex-nowrap mb-3" v-for="item in 5">
+                                            <span class="input-group-text">客戶</span>
+                                            <select class="form-select">
+                                              <option selected class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                            </select>
+                                            <span class="input-group-text">成數</span>
+                                            <input type="text" class="form-control" size="1">
+                                            <span class="input-group-text">%</span>
+                                          </div>
+                                        </div>
+                                        <div class="col align-self-end mb-3"><button class="_btn_blue">＋</button></div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="_btn_blue">儲存</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- 個人所得佔成modal -->
+                            </div>
+
+                          </div>
+                          <div class="hstack gap-2 justify-content-center align-items-center mt-1" :hidden="!income">
+
+                            <div>
+                              <select class="form-select form-select-sm" :disabled="!edit">
+                                <option selected class="text-dark">選擇層級</option>
+                                <option value="會員" class="text-dark">會員</option>
+                                <option value="代理" class="text-dark">代理</option>
+                                <option value="總代理" class="text-dark">總代理</option>
+                                <option value="股東" class="text-dark">股東</option>
+                                <option value="大股東" class="text-dark">大股東</option>
+                                <option value="總監" class="text-dark">總監</option>
+                              </select>
+                            </div>
+
+                            <div class="d-flex gap-2 justify-content-center align-items-center">
+
+                              <div>1325647890</div>
+  
+                              <div class="_btn_option p-0" role="button" data-bs-toggle="modal" data-bs-target="#editPercentage" :hidden="!edit"></div>
+  
+                              <!-- 個人所得佔成modal -->
+                              <div class="modal fade" id="editPercentage" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content _bg_main">
+                                    <div class="modal-header _bg_blue">
+                                      <h5 class="modal-title text-white _ls_5">個人所得佔成設定</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="input-group flex-nowrap mb-4">
+                                        <span class="input-group-text">自留</span>
+                                        <input type="text" class="form-control" size="1" disabled>
+                                        <span class="input-group-text">%</span>
+                                      </div>
+                                      <div class="row row-cols-auto align-items-baseline">
+                                        <div class="col">
+                                          <div class="input-group flex-nowrap mb-3" v-for="item in 5">
+                                            <span class="input-group-text">客戶</span>
+                                            <select class="form-select">
+                                              <option selected class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                              <option value="" class="text-dark">阿德</option>
+                                            </select>
+                                            <span class="input-group-text">成數</span>
+                                            <input type="text" class="form-control" size="1">
+                                            <span class="input-group-text">%</span>
+                                          </div>
+                                        </div>
+                                        <div class="col align-self-end mb-3"><button class="_btn_blue">＋</button></div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="_btn_blue">儲存</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- 個人所得佔成modal -->
+                            </div>
+
+                          </div>
+                        </td>
+                        <!-- 個人所得金額 -->
+
+                        <!-- 新增個人所得佔成按鈕 -->
+                        <td class="text-end"><button class="_btn_blue p-1" @click="this.income = true" :disabled="!edit">＋</button></td>
+                        <!-- 新增個人所得佔成按鈕 -->
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- 下層列表 -->
+
+              <!-- 上繳 -->
+              <div class="card _bg_main shadow">
+                <div class="card-body">
+                  <div class="row row-cols-auto justify-content-center align-items-center">
+
+                    <div class="col me-2">
+                      <div class="d-flex justify-content-center align-items-center gap-2">
+                        <div class="_btn_option p-0" role="button" data-bs-toggle="modal" data-bs-target="#customerEditor" :hidden="!edit"></div>
+                        <div class="fw-bold">上繳</div>
+
+                        <!-- 客戶編輯modal -->
+                        <div class="modal fade" id="customerEditor" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content _bg_main">
+                              <div class="modal-header _bg_blue">
+                                <h5 class="modal-title text-white _ls_5">客戶編輯</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row row-cols-auto align-items-baseline mb-3">
+                                  <div class="col"><input type="radio" name="customerSetting" id=""></div>
+                                  <div class="col">
+                                    <select class="form-select">
+                                      <option selected class="text-dark">選擇客戶</option>
+                                      <option value="" class="text-dark">001.阿德</option>
+                                      <option value="" class="text-dark">001.阿德</option>
+                                      <option value="" class="text-dark">001.阿德</option>
+                                      <option value="" class="text-dark">001.阿德</option>
+                                      <option value="" class="text-dark">001.阿德</option>
+                                      <option value="" class="text-dark">001.阿德</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="row row-cols-auto align-items-baseline">
+                                  <div class="col">
+                                    <input type="radio" name="customerSetting" id="" class="me-4" checked>
+                                    <label class="text-white _fs_15 _ls_2 mb-2">新增客戶</label>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input-group flex-nowrap mb-4">
+                                      <span class="input-group-text">編號</span>
+                                      <input type="text" class="form-control" size="1">
+                                      <span class="input-group-text">客戶名稱</span>
+                                      <input type="text" class="form-control" size="5">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="_btn_blue">儲存</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- 客戶編輯modal -->
+
+                      </div>
+                    </div>
+
+                    <div class="col pe-0">
+                      <select class="form-select form-select-sm" :disabled="!edit">
+                        <option selected class="text-dark">選擇層級</option>
+                        <option value="會員" class="text-dark">會員</option>
+                        <option value="代理" class="text-dark">代理</option>
+                        <option value="總代理" class="text-dark">總代理</option>
+                        <option value="股東" class="text-dark">股東</option>
+                        <option value="大股東" class="text-dark">大股東</option>
+                        <option value="總監" class="text-dark">總監</option>
+                      </select>
+                    </div>
+
+                    <div class="col me-3">1325647890</div>
+
+                    <div class="col me-3"><div class="vr"></div></div>
+
+                    <div class="col fw-bold me-2">個人所得</div>
+
+                    <div class="col pe-0">總計：</div>
+
+                    <div class="col">
+                      <div class="row row-cols-auto gx-2 align-items-center">
+                        <div class="col">1325647890</div>
+                        <div class="col">
+                          <div class="_btn_option p-0" role="button" data-bs-toggle="modal" data-bs-target="#editPercentage" :hidden="!edit"></div>
+
+                          <!-- 個人所得佔成modal -->
+                          <div class="modal fade" id="editPercentage" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content _bg_main">
+                                <div class="modal-header _bg_blue">
+                                  <h5 class="modal-title text-white _ls_5">個人所得佔成設定</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="input-group flex-nowrap mb-4">
+                                    <span class="input-group-text">自留</span>
+                                    <input type="text" class="form-control" size="1" disabled>
+                                    <span class="input-group-text">%</span>
+                                  </div>
+                                  <div class="row row-cols-auto align-items-baseline">
+                                    <div class="col">
+                                      <div class="input-group flex-nowrap mb-3" v-for="item in 5">
+                                        <span class="input-group-text">客戶</span>
+                                        <select class="form-select">
+                                          <option selected class="text-dark">阿德</option>
+                                          <option value="" class="text-dark">阿德</option>
+                                          <option value="" class="text-dark">阿德</option>
+                                          <option value="" class="text-dark">阿德</option>
+                                          <option value="" class="text-dark">阿德</option>
+                                          <option value="" class="text-dark">阿德</option>
+                                          <option value="" class="text-dark">阿德</option>
+                                        </select>
+                                        <span class="input-group-text">成數</span>
+                                        <input type="text" class="form-control" size="1">
+                                        <span class="input-group-text">%</span>
+                                      </div>
+                                    </div>
+                                    <div class="col align-self-end mb-3"><button class="_btn_blue">＋</button></div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="_btn_blue">儲存</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- 個人所得佔成modal -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 上繳 -->
+
+            </div>
+            <!-- 帳務編輯 -->
+
+          </div>
+        </div>
+        <!-- 帳務編輯區 -->
+
+        <!-- 客戶編輯區 -->
+        <div class="col">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <!-- 客戶編輯顯示/隱藏 -->
+            <button class="_btn_blue me-2" @click="this.customerEditor = !this.customerEditor">客戶編輯</button>
+            <!-- 客戶編輯顯示/隱藏 -->
+
+            <div class="hstack gap-2 text-nowrap" :hidden="!customerEditor">
+              <button class="_btn_blue">新增</button>
+              <button class="_btn_blue">修改</button>
+              <button class="_btn_red">刪除</button>
+              <button class="_btn_blue">儲存</button>
+            </div>
+          </div>
+
+          <!-- 客戶編輯表單 -->
+          <div class="card _bg_main mb-3 shadow" :hidden="!customerEditor">
+            <div class="card-body">
+              <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text justify-content-center" style="width: 103px;">編號</span>
+                <input type="text" class="form-control" size="5">
+                <span class="input-group-text justify-content-center" style="width: 103px;">姓名</span>
+                <input type="text" class="form-control" size="5">
+              </div>
+              <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text justify-content-center" style="width: 103px;">Line ID</span>
+                <input type="text" class="form-control" size="5">
+                <span class="input-group-text justify-content-center" style="width: 103px;">Telegram</span>
+                <input type="text" class="form-control" size="5">
+              </div>
+              <div class="input-group flex-nowrap" id="remark">
+                <span class="input-group-text justify-content-center" style="width: 103px;">備註</span>
+                <input type="text" class="form-control flex-grow-1">
+              </div>
+            </div>
+          </div>
+          <!-- 客戶編輯表單 -->
+
+          <!-- 客戶列表 -->
+          <div class="rounded _bg_main p-2 shadow" :hidden="!customerEditor">
+            <div style="height: 550px; overflow: scroll;">
+              <table class="table table-borderless text-center text-nowrap">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="70">編號</th>
+                    <th width="90">姓名</th>
+                    <th width="150">備註</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in 18">
+                    <td>E02</td>
+                    <td>阿德</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- 客戶列表 -->
+
+        </div>
+        <!-- 客戶編輯區 -->
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          income: false,
+          customerEditor: false,
+          edit: false,
+        }
+      }
+    }).mount('#app');
+
+  </script>
+</body>
+</html>

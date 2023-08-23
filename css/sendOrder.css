@@ -1,0 +1,7 @@
+.input-group-text {
+  background-color: var(--bg-maincolor2);
+}
+
+th, td {
+  padding: 7px 14px;
+}

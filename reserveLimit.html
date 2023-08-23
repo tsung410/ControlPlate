@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ControlPlate</title>
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/vue.global.js"></script>
+
+  <link rel="stylesheet" href="./css/universal.css">
+</head>
+<body>
+  <div id="app">
+    
+    <!-- header -->
+    <div class="container-fluid px-4 sticky-top shadow" id="header">
+      <div class="row row-cols-auto align-items-center" style="min-height: 50px;">
+        <div class="col">
+          <div class="nav">
+            <a href="index.html" class="nav-link text-warning" style="margin-left: 30px;">主頁</a>
+            <a href="websiteSetting.html" class="nav-link">網站設定</a>
+            <a href="reserveLimit.html" class="nav-link _nav_focus">預留數量限制</a>
+            <a href="accountingEditor.html" class="nav-link">帳務編輯</a>
+            <a href="billingErrorChecking.html" class="nav-link">帳務天地</a>
+            <a href="dailyAccounts.html" class="nav-link">當日報表</a>
+            <a href="customerDetails.html" class="nav-link">客戶明細</a>
+            <a href="customerTotal.html" class="nav-link">客戶總表</a>
+          </div>
+        </div>
+
+        <div class="col ms-auto me-4">
+          <div class="nav justify-content-end">
+            <a href="sendOrder.html" class="nav-link text-warning">出單</a>
+            <a href="sendOrderWebsiteSetting.html" class="nav-link">網站設定</a>
+            <a href="basicPrice.html" class="nav-link">基本價格</a>
+            <a href="IncreaseAndDecrease.html" class="nav-link">漲價降倍</a>
+            <a href="#" class="nav-link">下注紀錄</a>
+            <a href="sendOrderAccounts.html" class="nav-link">帳務查詢</a>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="d-flex gap-3 align-items-center">
+            <div class="dropdown">
+              <ul class="dropdown-menu">
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="sun" hidden>
+                    <img src="image/sun.png" width="30" height="30">
+                    淺色主題
+                  </label>
+                </li>
+                <li>
+                  <label class="dropdown-item text-black" role="button">
+                    <input type="radio" name="theme" id="moon" hidden checked>
+                    <img src="image/moon.png" width="30" height="30">
+                    深色主題
+                  </label>
+                </li>
+              </ul>
+              <button class="_btn_mode" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="image/sun.png" width="30" height="30" class="sun">
+                <img src="image/moon.png" width="30" height="30" class="moon" style="filter: invert(90%);">
+              </button>
+            </div>
+            <div class="dropdown">
+              <button class="navbar-toggler" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="dropdown-menu _bg_main2 shadow">
+                <li><a class="dropdown-item" href="#">當日開獎</a></li>
+                <li><a class="dropdown-item" href="#">開球紀錄</a></li>
+                <li><a class="dropdown-item" href="#">使用期限</a></li>
+                <li><a class="dropdown-item" href="#">操作說明</a></li>
+                <li><a class="dropdown-item" href="#">官方網站</a></li>
+                <li><a class="dropdown-item" href="#">更改密碼</a></li>
+                <li><a class="dropdown-item" href="#">分享</a></li>
+                <li><a class="dropdown-item" href="#">登出</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header -->
+
+    <div class="container-fluid p-4" id="main">
+      <div class="row row-cols-auto gx-5">
+
+        <!-- 預留設定區 -->
+        <div class="col" style="margin-left: 300px;">
+
+          <!-- 主帳號/指定號碼 切換 -->
+          <div class="d-flex gap-3 mb-4">
+            <label class="_tab text-center" role="button"><input type="radio" value="主帳號限支" v-model="typeSection" hidden>主帳號限支</label>
+            <label class="_tab text-center" role="button"><input type="radio" value="指定號碼預留" v-model="typeSection" hidden>指定號碼預留</label>
+          </div>
+          <!-- 主帳號/指定號碼 切換 -->
+
+          <!-- 表單 -->
+          <div class="card _bg_main mb-3 shadow" style="height: 260px;">
+            <div class="card-body">
+
+              <!-- 彩種切換 -->
+              <div class="d-flex gap-3 mb-4">
+                <label class="_tab w-100 text-center" role="button"><input type="radio" value="539" v-model="gameSetting_1" hidden>539</label>
+                <label class="_tab w-100 text-center" role="button"><input type="radio" value="大樂" v-model="gameSetting_1" hidden>大樂</label>
+                <label class="_tab w-100 text-center" role="button"><input type="radio" value="六合" v-model="gameSetting_1" hidden>六合</label>
+                <label class="_tab w-100 text-center" role="button"><input type="radio" value="加州" v-model="gameSetting_1" hidden>加州</label>
+              </div>
+              <!-- 彩種切換 -->
+
+              <!-- 主帳號限支表單 -->
+              <div class="col" :hidden="this.typeSection === '指定號碼預留'">
+                <div class="row row-cols-auto gx-4">
+                  <div class="col">
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text">全車</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text">二星</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text">三星</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text">四星</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                    <div class="input-group flex-nowrap">
+                      <span class="input-group-text">五星</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text">台號</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text">特尾</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2" :hidden="this.gameSetting_1 === '539'">
+                      <span class="input-group-text">天一</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2" :hidden="this.gameSetting_1 === '539'">
+                      <span class="input-group-text">天二</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                    <div class="input-group flex-nowrap" :hidden="this.gameSetting_1 === '539'">
+                      <span class="input-group-text">天三</span>
+                      <input type="text" class="form-control" size="5">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 主帳號限支表單 -->
+
+              <!-- 指定號碼預留表單 -->
+              <div class="col" :hidden="this.typeSection === '主帳號限支'">
+                <div class="input-group flex-nowrap mb-3">
+                  <span class="input-group-text">類別</span>
+                  <select class="form-select" style="width: 98px;">
+                    <option selected class="text-dark">請選擇</option>
+                    <option value="" class="text-dark">全車</option>
+                    <option value="" class="text-dark">二星</option>
+                    <option value="" class="text-dark">三星</option>
+                    <option value="" class="text-dark">四星</option>
+                    <option value="" class="text-dark">五星</option>
+                    <option value="" class="text-dark">台號</option>
+                    <option value="" class="text-dark">特尾</option>
+                    <option value="" class="text-dark">天一</option>
+                    <option value="" class="text-dark">天二</option>
+                    <option value="" class="text-dark">天三</option>
+                  </select>
+                </div>
+                <div class="input-group flex-nowrap mb-3">
+                  <span class="input-group-text">號碼</span>
+                  <input type="text" class="form-control" size="40">
+                </div>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text">數量</span>
+                  <input type="text" class="form-control" size="5">
+                </div>
+              </div>
+              <!-- 指定號碼預留表單 -->
+
+            </div>
+          </div>
+          <!-- 表單 -->
+
+          <!-- 主帳號勾選列表 -->
+          <div class="rounded _bg_main p-2 mb-3 shadow">
+            <div style="height: 450px; overflow: scroll;">
+              <table class="table table-borderless text-center text-nowrap">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="50"><input type="checkbox" name="" id="" class="form-check-input"></th>
+                    <th width="70">編號</th>
+                    <th width="184">版名</th>
+                    <th width="120">帳號</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in 18">
+                    <td><input type="checkbox" name="" id="" class="form-check-input"></td>
+                    <td>E02</td>
+                    <td>風雲-永-0.1</td>
+                    <td>z36978</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- 主帳號勾選列表 -->
+          
+          <div class="d-flex justify-content-end">
+            <button class="_btn_blue me-2">新增</button>
+            <button class="_btn_blue me-2">修改</button>
+            <button class="_btn_red me-2">刪除</button>
+            <button class="_btn_blue">儲存</button>
+          </div>
+
+        </div>
+        <!-- 預留設定區 -->
+
+        <!-- 預留資料列表區 -->
+        <div class="col">
+          <h6 class="_tb_head mb-4">預留資料列表</h6>
+          <div class="rounded _bg_main p-2 shadow">
+            <div style="width: 950px; height: 750px; overflow: scroll;">
+              <table class="table table-borderless text-center text-nowrap _tb_hover" :hidden="this.typeSection === '指定號碼預留'">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="70">彩種</th>
+                    <th width="50">編號</th>
+                    <th width="120">版名</th>
+                    <th width="70">全車</th>
+                    <th width="70">二星</th>
+                    <th width="70">三星</th>
+                    <th width="70">四星</th>
+                    <th width="70">五星</th>
+                    <th width="70">台號</th>
+                    <th width="70">特尾</th>
+                    <th width="70">天一</th>
+                    <th width="70">天二</th>
+                    <th width="70">天三</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in 18">
+                    <td>539</td>
+                    <td>01</td>
+                    <td>風雲-永-0.1</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>1000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-borderless text-center text-nowrap _tb_hover" :hidden="this.typeSection === '主帳號限支'">
+                <thead class="_th_border _bg_main sticky-top">
+                  <tr>
+                    <th width="70">彩種</th>
+                    <th width="50">編號</th>
+                    <th width="120">版名</th>
+                    <th width="70">類別</th>
+                    <th width="70">自留數量</th>
+                    <th width="300">號碼</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in 18">
+                    <td>539</td>
+                    <td>01</td>
+                    <td>風雲-永-0.1</td>
+                    <td>全車</td>
+                    <td>15</td>
+                    <td>01.02.03.04.05.06.07.08.09.10.11.12</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- 預留資料列表區 -->
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          typeSection: '主帳號限支',
+          gameType: '539',
+          gameSetting_1: '539',
+        }
+      }
+    }).mount('#app');
+
+  </script>
+</body>
+</html>

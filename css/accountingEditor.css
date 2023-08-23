@@ -1,0 +1,28 @@
+.list-group-item:hover {
+  background-color: #263c6e;
+}
+
+.btn-close {
+  filter: invert(100%);
+}
+
+.modal-header {
+  border-bottom: 1px solid #696973;
+}
+
+.modal-footer {
+  border-top: 1px solid #696973;
+}
+
+._border_bottom {
+  border-bottom: 1px solid #4b4b55;
+}
+
+._bg_blue {
+  background-color: #263c6e;
+  background-image: var(--bs-gradient);
+}
+
+.form-select:disabled {
+  opacity: 0.7;
+}

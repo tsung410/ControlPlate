@@ -1,0 +1,17 @@
+._tb_verNameColor > * {
+  color: var(--bs-warning);
+}
+
+._tb_resultColor > * {
+  background-color: rgb(255, 255, 204) !important;
+  color: rgb(55, 55, 65) !important;
+}
+
+._tb_border > :not(caption) > * > *  {
+  border: 0;
+  border-right: 1px solid rgba(108, 127, 115, 0.7);
+}
+
+._tx_red {
+  color: #ed1a3d;
+}
